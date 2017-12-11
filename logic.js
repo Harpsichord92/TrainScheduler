@@ -17,28 +17,29 @@
   $("#add-train-btn").on("click", function(event) {
   event.preventDefault();
 
-  // Grabs user input
-  var trainName = $("#train-name-input").val().trim();
-  var trainDest = $("#destination-input").val().trim();
-  var trainFirst = moment($("#first-input").val().trim(), "HH:mm").format("X");
-  var trainFreq = $("#frequency-input").val().trim();
+    // Grabs user input
+    var trainName = $("#train-name-input").val().trim();
+    var trainDest = $("#destination-input").val().trim();
+    var trainFirst = moment($("#first-input").val().trim(), "HH:mm").format("X");
+    var trainFreq = $("#frequency-input").val().trim();
 
-  // Creates local "temporary" object for holding train data
-  var newTrain = {
-    name: trainName,
-    destination: trainDest,
-    first: trainFirst,
-    freq: trainFreq
-  };
+      // Creates local "temporary" object for holding train data
+      var newTrain = {
+        name: trainName,
+        destination: trainDest,
+        first: trainFirst,
+        freq: trainFreq
 
-  // Uploads train data to the database
-  database.ref().push(newTrain);
+      };
 
-  // Logs everything to console
-  console.log(newTrain.name);
-  console.log(newTrain.destination);
-  console.log(newTrain.first);
-  console.log(newTrain.frequency);
+      // Uploads train data to the database
+      database.ref().push(newTrain);
+
+      // Logs everything to console
+      console.log(newTrain.name);
+      console.log(newTrain.destination);
+      console.log(newTrain.first);
+      console.log(newTrain.frequency);
 
   // Alert
   alert("Train successfully added");
@@ -48,6 +49,7 @@
   $("#destination-input").val("");
   $("#first-input").val("");
   $("#frequency-input").val("");
+
 });
 
 //Firebase event for adding trains to the database and a row in the html when a user adds an entry
