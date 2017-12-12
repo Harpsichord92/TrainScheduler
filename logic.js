@@ -83,7 +83,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
   // Next Train Info
   console.log(minutesTilTrain);
-  console.log(nextTrainFormat)
+  console.log(nextTrainFormat);
 
   // Add each train's data into the table
   $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + 
