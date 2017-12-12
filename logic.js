@@ -69,18 +69,27 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(trainFirst);
   console.log(trainFreq);
 
-  // Prettify the First Train Time
-  var trainFirstPretty = moment.unix(trainFirst).format("HH:mm A");
+  // Train time in military format
+  var trainFirstFormat = moment.unix(trainFirst).format("HH:mm A");
 
-  // To calculate the minutes away the next train is
-  var trainMinutes = moment().diff(moment.unix(trainFirst, "X"), "minutes");
-  console.log(trainMinutes);
+  // Calculates the minutes away the next train is
+  var timeDiff = moment().diff(moment.unix(trainFirst, "X"), "minutes");
+  var timeRemainder = timeDiff % trainFreq;
+  var minutesTilTrain = trainFreq - timeRemainder;
+
+  // Updates Next Train Time
+  var nextTrain = moment().add(minutesTilTrain, "minutes");
+  var nextTrainFormat = moment(nextTrain).format('HH:mm A');
+
+  // Next Train Info
+  console.log(minutesTilTrain);
+  console.log(nextTrainFormat)
 
   // Add each train's data into the table
   $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + 
                                                 trainDest + "</td><td>" +
                                                 trainFreq + "</td><td>" + 
-                                                trainFirstPretty + "</td><td>" + 
-                                                trainMinutes + "</td><td>" +
+                                                nextTrainFormat + "</td><td>" + 
+                                                minutesTilTrain + "</td><td>" +
                                    "</tr>");
 });
